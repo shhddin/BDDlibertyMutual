@@ -1,7 +1,5 @@
 package bdd.objects;
 
-
-
 import static org.junit.Assert.assertEquals;
 
 import org.openqa.selenium.WebDriver;
@@ -10,9 +8,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import bdd.common.CommonFunctions;
-
-
-
 
 public class HomePage {
 	WebDriver driver;
@@ -24,22 +19,24 @@ public class HomePage {
 		this.commons = commons;
 	}
 
+	@FindBy(xpath = "//*[@id=\"__next\"]/div[1]/div/div/div/div[2]/div[2]/div[1]/button")
+	WebElement searchWebElement;
+
 	@FindBy(xpath = "//h1[contains(text(),'Only pay')]")
 	WebElement title1Element;
-	
-	@FindBy(xpath ="//select[@id='quote-lob-select']")
+
+	@FindBy(xpath = "//select[@id='quote-lob-select']")
 	WebElement selectAutoElement;
-	
 
 	@FindBy(xpath = "//input[@id='quote-zipCode-input']")
 	WebElement zipCodElement;
 
 	@FindBy(xpath = "//button[contains(text(),'Get my price')]")
 	WebElement getMyPriceButtonElement;
-	
+
 	@FindBy(xpath = "//h1[contains(text(),'Access Denied')]")
 	WebElement deniedH1Element;
-	
+
 	@FindBy(xpath = "//button[normalize-space(text())='Shop insurance']")
 	WebElement shopInsuranceBtnWebElement;
 	@FindBy(xpath = "//button[normalize-space(text())='Claims']")
@@ -48,69 +45,59 @@ public class HomePage {
 	WebElement customerSupportWebElement;
 	@FindBy(xpath = "//*[@data-testid='site-show-search-button']")
 	WebElement searchBtnWebElement;
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	@FindBy (xpath = "//a[contains(text(),'Car insurance coverage')]")
-	WebElement calculatorWebElement;
 
+	@FindBy(xpath = "//a[contains(text(),'Car insurance coverage')]")
+	WebElement calculatorWebElement;
 	
-	
-	private void getTitle(String expected) {
-		assertEquals(commons.getText(title1Element),expected);
-	}
-	
-	private void selectAuto() {
-		commons.selectDropDown(selectAutoElement, "auto");
+	public void searchNow(String value) {
+		commons.inputValuesEnter(searchBtnWebElement, value);
 		
 	}
 
-	private void inputZipcode(String zipcodesString) {
+	public void getTitle(String expected) {
+		assertEquals(commons.getText(title1Element), expected);
+	}
+
+	public void selectAuto() {
+		commons.selectDropDown(selectAutoElement, "auto");
+
+	}
+
+	public void inputZipcode(String zipcodesString) {
 		commons.inputValues(zipCodElement, zipcodesString);
 	}
-	
-	private void clickGetMyPriceButton() {
+
+	public void clickGetMyPriceButton() {
 		commons.click(getMyPriceButtonElement);
 	}
-	
-	private void getTextDenied(String expectedH1) {
-		assertEquals(commons.getText(deniedH1Element),expectedH1);
+
+	public void getTextDenied(String expectedH1) {
+		assertEquals(commons.getText(deniedH1Element), expectedH1);
 	}
-	
+
 	private void isElementDisplayed() {
 		commons.isDisplayed(shopInsuranceBtnWebElement);
 		commons.isDisplayed(claimsBtnWebElement);
 		commons.isDisplayed(customerSupportWebElement);
 		commons.isDisplayed(searchBtnWebElement);
 	}
-	
-	
+
 	private void moveToCalc() {
 		commons.moveToElementClick(driver, calculatorWebElement);
-	}	
-	
-	
-	
-	
-	
+	}
+
 	public void homePageElement() {
 		isElementDisplayed();
 	}
 
-	public void autoQuoteSteps(String expected, String zipcodesString,String expectedH1) {
+	public void autoQuoteSteps(String expected, String zipcodesString, String expectedH1) {
 		getTitle(expected);
 		selectAuto();
 		inputZipcode(zipcodesString);
 		clickGetMyPriceButton();
-		getTextDenied(expectedH1);		
+		getTextDenied(expectedH1);
 	}
-	
+
 	public void homepageCalculate() {
 		moveToCalc();
 	}

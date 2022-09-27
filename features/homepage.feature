@@ -1,14 +1,11 @@
+@Homepage
+Feature: In the homepage as a user i will check if some buttons are clickable.
 
-Feature: In the homepage as a user i will check if some buttons are clickable. also i will be able to use the calculate
-  features from the website.
-@autoLib
+  @autoQuote
   Scenario: Validate homepae buttons and get auto qoutes
     Given user is in the homepage to checks for buttons
-    Then user will try to get auto qoute
-@calc
-  Scenario: 
-    When click calculator
-    Then user will land on calculation page and user will input zipcode 19111
-    Then user will click on the option Own
-    And user will click on less than one year
-    Then click on continue 
+    Then user get title "Only pay for what you need"
+    And then select Auto
+    Then user input 19111 to the zipcode
+    And click the price button
+    Then user will be in the "Access Denied" page

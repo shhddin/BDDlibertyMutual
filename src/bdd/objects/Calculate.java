@@ -80,6 +80,7 @@ public class Calculate {
 
 	public void inputZip(String zip) {
 		commons.inputValues(zipWebElement, zip);
+		
 	}
 	
 	public void zip(String zip) {
